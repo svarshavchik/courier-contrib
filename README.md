@@ -1,3 +1,14 @@
+## autoreply
+
+_20150202 (C) markc@renta.net (AGPLv3)_
+
+A simple vacation autoreply script for courier-mta based mailservers.
+
+- courier-imap/mta with courier-authdaemon and maildrop installed
+- nano is installed (and "stat", part of the coreutils package)
+- the MAILDIR variable below is set to the root of your maildir folders
+- the users .mailfilter is not used for anything else
+
 ## cancelmailq
 
 _20120513 (C) markc@renta.net (AGPLv3)_
