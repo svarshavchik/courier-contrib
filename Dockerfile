@@ -8,8 +8,8 @@
 FROM fedora:latest
 
 ARG COURIER_UNICODE_VERSION=2.1
-ARG COURIER_AUTHLIB_VERSION=0.69.0
-ARG COURIER_VERSION=1.0.5
+ARG COURIER_AUTHLIB_VERSION=0.69.1
+ARG COURIER_VERSION=1.0.9
 ARG SF_BASEURL="https://sourceforge.net/projects/courier/files"
 
 RUN set -e -x \
@@ -25,7 +25,12 @@ RUN set -e -x \
         openssl-devel openssl-perl pam-devel pcre-devel \
         perl perl-generators procps-ng \
         libtool mysql-devel openldap-devel postgresql-devel \
-        sqlite-devel libtool-ltdl-devel
+        sqlite-devel libtool-ltdl-devel glibc-all-langpacks
+
+RUN set -e -x \
+    && localedef --list-archive | grep -i -v ^en | xargs localedef --delete-from-archive \
+    && mv -bf /usr/lib/locale/locale-archive{,.tmpl} \
+    && build-locale-archive
 
 RUN set -e -x \
     && adduser courier \
